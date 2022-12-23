@@ -1,5 +1,8 @@
 "use strict";
 const { Model } = require("sequelize");
+
+const bcrypt = require("bcrypt");
+const { SALT } = require("../config/serverConfig");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -34,5 +37,15 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
+
+  // CASE : we should encrypt password for every user
+  // -->  so here we will have access to the user object before the actual creation because user is not yet created
+  // hook
+  // this "user" is the sequelize object
+  User.beforeCreate((user) => {
+    const encryptedPassword = bcrypt.hashSync(user.password, SALT);
+    user.password = encryptedPassword;
+  });
+
   return User;
 };
