@@ -28,9 +28,11 @@ class UserRepository {
   }
 
   // get the user based on particular id
+
   async getById(userId) {
     try {
       const user = await User.findByPk(userId, {
+        // this will help to us to filter the user on the basis of attributes . You will only get email and id attributes
         attributes: ["email", "id"],
       });
       return user;
