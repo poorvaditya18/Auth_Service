@@ -24,12 +24,18 @@ but storing raw password is the worst design . We should not do it. Privacy Brea
 
 <!--
 To keep password encrypted -> use bcrypt pckg
-when to keep the password the encrypted ? 
-In which layer we should keep this algorithm 
+when to keep the password the encrypted ?
+In which layer we should keep this algorithm
 ans : Model -> as for every user we should encrypt the password. In databases we can easily do this using TRIGGERS .
-What are Triggers ? 
+What are Triggers ?
 - Triggers are events in DB.
 - ex: deleted a row, updated a row .. these are events.
 - How we can setup the triggers ? using Sequelize triggers
 - like afterCreate, beforeCreate
+ -->
+
+<!--
+User will be signup
+then when it will sign in we will check password
+if details got matched then generate token and send it to frontend.
  -->
