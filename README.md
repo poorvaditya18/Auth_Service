@@ -23,6 +23,7 @@ but storing raw password is the worst design . We should not do it. Privacy Brea
  -->
 
 <!--
+
 To keep password encrypted -> use bcrypt pckg
 when to keep the password the encrypted ?
 In which layer we should keep this algorithm
@@ -35,7 +36,19 @@ What are Triggers ?
  -->
 
 <!--
+
 User will be signup
 then when it will sign in we will check password
 if details got matched then generate token and send it to frontend.
  -->
+
+ <!-- How this auth service will work ?
+ Suppose for booking 
+user should be authenticated means you need to send the JWT token
+
+By convention ->
+Bearer authenciation -> we send the JWT token inside the header .
+
+in our project ->
+from api gateway we can call the auth service and store  the user whether it is authenticated or not
+  -->
