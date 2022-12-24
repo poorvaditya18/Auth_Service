@@ -32,8 +32,23 @@ class UserRepository {
   async getById(userId) {
     try {
       const user = await User.findByPk(userId, {
-        // this will help to us to filter the user on the basis of attributes . You will only get email and id attributes
+        // this will help to us to filter the user on the basis of attributes . You will only get email and id attributes. not the password 
         attributes: ["email", "id"],
+      });
+      return user;
+    } catch (error) {
+      console.log("Something went wrong on repository layer");
+      throw error;
+    }
+  }
+
+  // get the user by email
+  async getByEmail(userEmail) {
+    try {
+      const user = await User.findOne({
+        where: {
+          email: userEmail,
+        },
       });
       return user;
     } catch (error) {
