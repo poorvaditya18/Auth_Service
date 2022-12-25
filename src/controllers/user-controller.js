@@ -53,7 +53,6 @@ const signIn = async (req, res) => {
 // Incoming request is authenticated request or not
 // Frontend has saved the token .. it will send the JWT token in the header.
 // So from header we will fetch and then check whether it is valid token or not.
-
 const isAuthenticated = async (req, res) => {
   try {
     const token = req.headers["x-access-token"];
@@ -78,8 +77,31 @@ const isAuthenticated = async (req, res) => {
   }
 };
 
+
+// check for admin role
+const isAdmin = async (req, res) => {
+  try {
+    const response = await userService.isAdmin(req.body.id);
+    return res.status(200).json({
+      success: true,
+      message: "Successfully fetched whether user is admin or not",
+      data: response,
+      error: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Something went wrong",
+      data: {},
+      success: false,
+      err: error,
+    });
+  }
+};
+
 module.exports = {
   create,
   signIn,
   isAuthenticated,
+  isAdmin,
 };
