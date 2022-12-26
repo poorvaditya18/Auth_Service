@@ -2,8 +2,6 @@ const { StatusCodes } = require("http-status-codes");
 
 
 // ERROR --> in built class 
-
-
 class AppErrors extends Error {
 
    // default prop 

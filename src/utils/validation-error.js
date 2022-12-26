@@ -1,7 +1,7 @@
 const AppErrors = require("./error-handler");
 const { StatusCodes } = require("http-status-codes");
 
-// this is client side error
+
 class ValidationError extends AppErrors {
   constructor(error) {
     // parsing the error
