@@ -1,4 +1,5 @@
 const { User, Role } = require("../models/index");
+const ValidationError = require("../utils/validation-error");
 
 class UserRepository {
   // create user
@@ -7,6 +8,11 @@ class UserRepository {
       const user = await User.create(data);
       return user;
     } catch (error) {
+      // console.log(error);
+      if (error.name == "SequelizeValidationError") {
+        // console.log("Creating new validation error");
+        throw new ValidationError(error);
+      }
       console.log("Something went wrong on repository layer");
       throw error;
     }
@@ -28,7 +34,6 @@ class UserRepository {
   }
 
   // get the user based on particular id
-
   async getById(userId) {
     try {
       const user = await User.findByPk(userId, {
@@ -57,7 +62,7 @@ class UserRepository {
     }
   }
 
-  //this will tell whether user is admin or not 
+  //this will tell whether user is admin or not
   async isAdmin(userId) {
     try {
       const user = await User.findByPk(userId);
@@ -66,7 +71,7 @@ class UserRepository {
           name: "ADMIN",
         },
       });
-      // check 
+      // check
       return user.hasRole(adminRole);
     } catch (error) {
       console.log("Something went wrong on repository layer");
