@@ -52,3 +52,11 @@ Bearer authenciation -> we send the JWT token inside the header .
 in our project ->
 from api gateway we can call the auth service and store  the user whether it is authenticated or not
   -->
+
+<!-- 
+MANY TO MANY RELATIONSHIP
+user -> many roles
+1 role -> can have many users
+NOTE!
+when you have many - many you required third table to associate them .
+ -->
