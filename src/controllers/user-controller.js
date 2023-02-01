@@ -2,6 +2,7 @@ const UserService = require("../services/user-service");
 
 const userService = new UserService();
 
+//signUp
 const create = async (req, res) => {
   try {
     // parsing the request
@@ -57,8 +58,7 @@ const isAuthenticated = async (req, res) => {
   try {
     const token = req.headers["x-access-token"];
     // const isVerified = userService.verifyToken(token); // {email:'',id:'',iat:'',exp:''}
-    // //suppose token that belongs to email .. user itself got deleted .. then in that case we should not check for that token
-
+    // suppose token that belongs to email .. user itself got deleted .. then in that case we should not check for that token
     const response = await userService.isAuthenticated(token);
     return res.status(200).json({
       success: true,

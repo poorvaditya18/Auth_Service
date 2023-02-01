@@ -4,7 +4,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { JWT_KEY } = require("../config/serverConfig");
 const AppErrors = require("../utils/error-handler");
-
+const { AUTH_USER, AUTH_PASS } = require("../config/serverConfig");
+const nodemailer = require("nodemailer");
 class UserService {
   constructor() {
     this.userRepository = new UserRepository();
@@ -43,8 +44,7 @@ class UserService {
       const newJWT = this.createToken({ email: user.email, id: user.id });
       return newJWT;
     } catch (error) {
-      if(error.name=='AttributeNotFound')
-      {
+      if (error.name == "AttributeNotFound") {
         throw error;
       }
       console.log("Something went wrong in the sign in process");
@@ -107,6 +107,39 @@ class UserService {
       throw error;
     }
   }
+
+  //user.email , user.id
+  // mailGeneration(user, token) {
+  //   const transporter = nodemailer.createTransport({
+  //     service: "gmail",
+  //     auth: {
+  //       user: AUTH_USER,
+  //       pass: AUTH_PASS,
+  //     },
+  //   });
+
+  //   const mailConfigurations = {
+  //     // It should be a string of sender/server email
+  //     from: `${AUTH_USER}`,
+
+  //     to: `${user.email}`,
+
+  //     // Subject of Email
+  //     subject: "Email Verification",
+
+  //     // This would be the text of email body
+  //     text: `Hi! There, You have recently visited
+  //          our website and entered your email.
+  //          Please follow the given link to verify your email
+  //          http://localhost:3000/verify/${token}
+  //          Thanks`,
+  //   };
+
+  //   transporter.sendMail(mailConfigurations, function (error, info) {
+  //     if (error) throw Error(error);
+  //     console.log("Email Sent Successfully");
+  //     console.log(info);
+  //   });
 }
 
 module.exports = UserService;

@@ -75,7 +75,7 @@ class UserRepository {
     }
   }
 
-  //this will tell whether user is admin or not
+  //this will tell whether user have  admin role or not
   async isAdmin(userId) {
     try {
       const user = await User.findByPk(userId);

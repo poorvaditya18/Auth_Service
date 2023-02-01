@@ -60,3 +60,5 @@ user -> many roles
 NOTE!
 when you have many - many you required third table to associate them .
  -->
+
+ <!-- TODO : Need to setup verify mail service!  -->
